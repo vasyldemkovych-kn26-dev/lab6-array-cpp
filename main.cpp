@@ -1,17 +1,25 @@
 #include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main() {
-    const int N = 14;
-    double A[N] = {5, -2, 3, -4, 7, 8, -1, 6, -9, 2, 4, -3, 10, -6};
-    double B[N];
-    double sumNeg = 0, sumPos = 0;
-    int countNeg = 0, countPos = 0;
+    srand(time(0));
+    int N;
+    cout << "Enter array size N: ";
+    cin >> N;
+    vector<double> A(N), B(N);
 
     cout << "Array A: ";
-    for (int i = 0; i < N; i++) cout << A[i] << " ";
+    for (int i = 0; i < N; i++) {
+        A[i] = rand() % 21 - 10;
+        cout << A[i] << " ";
+    }
     cout << endl;
 
+    double sumNeg = 0, sumPos = 0;
+    int countNeg = 0, countPos = 0;
     for (int i = 0; i < N; i++) {
         if (A[i] < 0) { sumNeg += A[i]; countNeg++; }
         else if (A[i] > 0) { sumPos += A[i]; countPos++; }
