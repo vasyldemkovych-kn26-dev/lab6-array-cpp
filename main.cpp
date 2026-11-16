@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
     const int N = 14;
-    double A[N] = {5, -2, 3, -4, 7, 8, -1, 6, -9, 2, 4, -3, 10, -6};
+    double A[N] = {-5, -2, -3, -4, -7, -8, -1, -6, -9, -2, -4, -3, -10, -6};
     double B[N];
     double sumNeg = 0, sumPos = 0;
     int countNeg = 0, countPos = 0;
@@ -17,13 +17,18 @@ int main() {
         else if (A[i] > 0) { sumPos += A[i]; countPos++; }
     }
 
-    double avgNeg = (countNeg > 0) ? sumNeg / countNeg : 0;
-    double avgPos = (countPos > 0) ? sumPos / countPos : 0;
-
-    for (int i = 0; i < N; i++) {
-        B[i] = A[i];
-        if ((i + 1) % 2 == 0 && A[i] < 0) B[i] = avgNeg;
-        if ((i + 1) % 2 != 0) B[i] = avgPos;
+    if (countPos == 0) {
+        for (int i = 0; i < N; i++) B[i] = 0;
+    } else if (countNeg == 0) {
+        for (int i = 0; i < N; i++) B[i] = 1;
+    } else {
+        double avgNeg = sumNeg / countNeg;
+        double avgPos = sumPos / countPos;
+        for (int i = 0; i < N; i++) {
+            B[i] = A[i];
+            if ((i + 1) % 2 == 0 && A[i] < 0) B[i] = avgNeg;
+            if ((i + 1) % 2 != 0) B[i] = avgPos;
+        }
     }
 
     cout << "Array B: ";
